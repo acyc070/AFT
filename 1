@@ -1,0 +1,40 @@
+let lastExecutionTime = 0;
+
+function replaceTextInNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+        node.nodeValue = node.nodeValue
+            .replace(/Jimmy Hall|Jimmy/i, 'Nameless')
+            .replace(/Hugo\/Hugo Punch\/Hugo Hall/i, 'It')
+            .replace(/Maya/i, 'Guy'); // Added case-insensitive replacement for 'Maya'
+    } else {
+        // Recursively call to replace text in child nodes
+        node.childNodes.forEach(replaceTextInNode);
+    }
+}
+
+function replaceTextInDocument() {
+    const currentTime = Date.now();
+    if (currentTime - lastExecutionTime >= 50) { // Throttle to 15 FPS (~66.67ms)
+        lastExecutionTime = currentTime;
+        replaceTextInNode(document.body);
+    }
+}
+
+// Use requestAnimationFrame for smooth updates
+function update() {
+    replaceTextInDocument();
+    requestAnimationFrame(update);
+}
+
+// Observe changes in the DOM, so newly added text is also replaced
+const observer = new MutationObserver(() => {
+    replaceTextInDocument();
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+
+// Initial replacement in the existing document
+replaceTextInDocument();
+
+// Start the update loop
+requestAnimationFrame(update);

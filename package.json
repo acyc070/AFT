@@ -1,0 +1,24 @@
+{
+  "name": "At Dead Of Night",
+  "main": "1.HTML",
+  "description": "",
+  "version": "",
+  "window": {
+    "title": "At Dead Of Night",
+    "icon": "",
+    "toolbar": false,
+    "frame": true,
+    "width": 1280,
+    "height": 720,
+    "position": "0px 0px",
+    "min_width": 1280,
+    "min_height": 720,
+    "max_width": 9999,
+    "max_height": 9999,
+    "kiosk": true
+  },
+  "chromium-args": "--ignore-gpu-blacklist --disable-pinch --disable-raf-throttling",
+  "webkit": {
+    "plugin": true
+  }
+}
